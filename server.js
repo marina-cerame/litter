@@ -9,7 +9,7 @@ var port = 8080;
 
 mongoose.connect(uri);
 
-//express static?
+// express static?
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({'extended': 'true'}));
 app.use(bodyParser.json());
