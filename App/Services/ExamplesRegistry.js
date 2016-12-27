@@ -12,9 +12,9 @@ export const addExample = (title: string, usage: () => React$Element<*>) => { if
 const renderExample = (example: Object) => {
   return (
     <View key={example.title}>
-      <View style={ApplicationStyles.darkLabelContainer}>
+      {/* <View style={ApplicationStyles.darkLabelContainer}>
         <Text style={ApplicationStyles.darkLabel}>{example.title}</Text>
-      </View>
+      </View> */}
       {example.usage.call()}
     </View>
   )

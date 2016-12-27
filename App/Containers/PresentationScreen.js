@@ -21,16 +21,16 @@ export default class PresentationScreen extends React.Component {
 
           <View style={styles.section} >
             <Text style={styles.sectionText} >
-              Default screens for development, debugging, and alpha testing
-              are available below.
+              Click a pin from the map to collect litter,
+              Click the button below to drop your own
             </Text>
           </View>
 
           <RoundedButton onPress={NavigationActions.componentExamples}>
-            Component Examples Screen
+            Drop Litter
           </RoundedButton>
 
-          <RoundedButton onPress={NavigationActions.usageExamples}>
+          {/* <RoundedButton onPress={NavigationActions.usageExamples}>
             Usage Examples Screen
           </RoundedButton>
 
@@ -44,11 +44,11 @@ export default class PresentationScreen extends React.Component {
 
           <RoundedButton onPress={NavigationActions.deviceInfo}>
             Device Info Screen
-          </RoundedButton>
+          </RoundedButton> */}
 
-          <View style={styles.centered}>
+          {/* <View style={styles.centered}>
             <Text style={styles.subtitle}>Made with ❤️ by Infinite Red</Text>
-          </View>
+          </View> */}
 
         </ScrollView>
       </View>
