@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { Scene, Router } from 'react-native-router-flux'
 import Styles from './Styles/NavigationContainerStyle'
-import NavigationDrawer from './NavigationDrawer'
+// import NavigationDrawer from './NavigationDrawer'
 import NavItems from './NavItems'
 import CustomNavBar from '../Navigation/CustomNavBar'
 
@@ -29,10 +29,10 @@ class NavigationRouter extends Component {
   render () {
     return (
       <Router>
-        <Scene key='drawer' component={NavigationDrawer} open={false}>
+        <Scene key='drawer' /*component={NavigationDrawer}*/ open={false}>
           <Scene key='drawerChildrenWrapper' navigationBarStyle={Styles.navBar} titleStyle={Styles.title} leftButtonIconStyle={Styles.leftButton} rightButtonTextStyle={Styles.rightButton}>
-            <Scene initial key='presentationScreen' component={PresentationScreen} title='Ignite' renderLeftButton={NavItems.hamburgerButton} />
-            <Scene key='componentExamples' component={AllComponentsScreen} title='Components' />
+            <Scene initial key='presentationScreen' component={PresentationScreen} title='Litter' renderLeftButton={NavItems.hamburgerButton} />
+            <Scene key='componentExamples' component={AllComponentsScreen} title='Drop Litter' />
             <Scene key='usageExamples' component={UsageExamplesScreen} title='Usage' rightTitle='Example' onRight={() => window.alert('Example Pressed')} />
             <Scene key='login' component={LoginScreen} title='Login' hideNavBar />
             <Scene key='listviewExample' component={ListviewExample} title='Listview Example' />
