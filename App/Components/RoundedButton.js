@@ -8,8 +8,8 @@ import ExamplesRegistry from '../Services/ExamplesRegistry'
 // Example
 ExamplesRegistry.add('Rounded Button', () =>
   <RoundedButton
-    text='real buttons have curves'
-    onPress={() => window.alert('Rounded Button Pressed!')}
+    text='Litter!'
+    onPress={() => window.alert('This button should pin litter to the map')}
   />
 )
 
