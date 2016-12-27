@@ -5,3 +5,5 @@ var Litter = require('./models/litter');
 // get - load page, load map, populate litter, load selected litter
 
 // post - add litter to db
+
+// get '/' return PresentationScreen
