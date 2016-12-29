@@ -5,6 +5,7 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Litter', {
-  coordinates: String,
+  latitude: Number,
+  longitude: Number,
   text: String
 })

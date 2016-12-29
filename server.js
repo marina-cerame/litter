@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(methodOverride());
 
-require('./backend/routes.js')(app);
+require('./backend/routes.js');
 
 app.listen(port);
 console.log('Litter listening on port ' + port);
