@@ -24,7 +24,7 @@ export default class MapCallout extends React.Component {
 
   constructor (props: MapCalloutProps) {
     super(props)
-    this.onPress = this.props.onPress.bind(this, this.props.location)
+    this.onPress = this.props.onPress.bind(null, this, this.props.location)
   }
 
   render () {
