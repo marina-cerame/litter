@@ -9,7 +9,10 @@ import ExamplesRegistry from '../Services/ExamplesRegistry'
 ExamplesRegistry.add('Rounded Button', () =>
   <RoundedButton
     text='Litter!'
-    onPress={() => window.alert('This button should pin litter to the map')}
+    onPress={() => {
+      console.log(this.state.region, 'this state region');
+      console.log(props, 'heres props in rounded button');
+      window.alert('This button should pin litter to the map')}}
   />
 )
 

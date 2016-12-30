@@ -113,7 +113,7 @@ var CustomMap = React.createClass({
     },
 
   render() {
-    this.state.locations.map(location=> { console.log(location, 'heres locations in render in map')});
+    // this.state.locations.map(location=> { console.log(location, 'heres locations in render in map')});
     return (
       <View style={styles.container}>
         <MapView
