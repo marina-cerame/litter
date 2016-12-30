@@ -5,6 +5,7 @@ import { ScrollView, Text, Image, View } from 'react-native'
 import { Images } from '../Themes'
 import RoundedButton from '../Components/RoundedButton'
 import { Actions as NavigationActions } from 'react-native-router-flux'
+import CustomMap from './MapviewExample'
 
 // Styles
 import styles from './Styles/PresentationScreenStyle'
@@ -17,14 +18,15 @@ export default class PresentationScreen extends React.Component {
         <ScrollView style={styles.container}>
           <View style={styles.centered}>
             <Image source={Images.clearLogo} style={styles.logo} />
+            <CustomMap />
           </View>
 
-          <View style={styles.section} >
+          {/* <View style={styles.section} >
             <Text style={styles.sectionText} >
               Click a pin from the map to collect litter,
               Click the button below to drop your own
             </Text>
-          </View>
+          </View> */}
 
           <RoundedButton onPress={NavigationActions.componentExamples}>
             Drop Litter
