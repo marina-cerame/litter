@@ -7,14 +7,14 @@ import RoundedButton from './RoundedButton'
 // var Litter = require('./models/litter');
 
 // Example
-ExamplesRegistry.add('Map Callout', () =>
-  <MapCallout
-    location={{
-      title: 'Callout Example'
-    }}
-    onPress={() => window.alert('That tickles!')}
-  />
-)
+// ExamplesRegistry.add('Map Callout', () =>
+//   <MapCallout
+//     location={{
+//       title: 'Callout Example'
+//     }}
+//     onPress={() => window.alert('That tickles!')}
+//   />
+// )
 
 type MapCalloutProps = {
   location: Object,
@@ -54,9 +54,9 @@ export default class MapCallout extends React.Component {
     * Note: if you don't want your callout surrounded by the default tooltip, pass `tooltip={true}` to `MapView.Callout`
     *************************************************************/
     const { location } = this.props
-    const { text } = this.state
-    const { fetching } = this.props
-    const editable = !fetching
+    // const { text } = this.state
+    // const { fetching } = this.props
+    // const editable = !fetching
     return (
       <MapView.Callout style={Styles.callout}>
         {/* <TouchableOpacity onPress={this.onPress}> */}
@@ -66,15 +66,15 @@ export default class MapCallout extends React.Component {
           //  editable={editable}
           //  keyboardType='default'
           //  returnKeyType='next'
+           clearTextOnFocus={true}
            style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
            maxLength = {200}
            multiline = {false}
            placeholder="Type a poem. Think a thought."
            onChangeText={this.handleChangeSubmit}
-           clearTextOnFocus={true}
            value={this.state.text}
           //  onSubmitEditing
-          //  numberOfLines = {8}
+           numberOfLines = {1}
          />
          <RoundedButton
            text='Litter!'
