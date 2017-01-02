@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactNative = require('react-native');
 import MapCallout from '../Components/MapCallout'
+import UserMapCallout from '../Components/UserMapCallout'
 var {
   StyleSheet,
   PropTypes,
@@ -26,7 +27,8 @@ const fakeDB = [
   { text: 'You dont know what you got til its gone', latitude: 38.9579357, longitude: -77.0704922},
   { text: 'Hellooooo from washington', latitude: 38.9579327, longitude: -77.0704902},
   { text: 'Geriatrics unite', latitude: 38.9579001, longitude: -77.0704800},
-  { text: 'Here be the living', latitude: 38.9559237, longitude: -77.0666152}
+  { text: 'Here be the living', latitude: 38.9559237, longitude: -77.0666152},
+  { text: 'Here are the living', latitude: 29.9510651, longitude: -90.0715331}
 ];
 
 var CustomMap = React.createClass({
@@ -35,7 +37,7 @@ var CustomMap = React.createClass({
     // console.log(position, 'heres position in initial state')
     return {
       locations: fakeDB,
-      showUserLocation: true,
+      showUserLocation: false,
       region: {
         latitude: LATITUDE,
         longitude: LONGITUDE,
@@ -52,7 +54,7 @@ var CustomMap = React.createClass({
         this.setState({
           region: {
             locations: fakeDB,
-            showUserLocation: true,
+            showUserLocation: false,
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
             latitudeDelta: LATITUDE_DELTA,
@@ -67,7 +69,7 @@ var CustomMap = React.createClass({
     this.watchID = navigator.geolocation.watchPosition((position) => {
       const newRegion = {
         locations: fakeDB,
-        showUserLocation: true,
+        showUserLocation: false,
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
         latitudeDelta: LATITUDE_DELTA,
@@ -93,9 +95,22 @@ var CustomMap = React.createClass({
       * presses your callout.
       *************************************************************/
       return (
-        <div>{text}</div>
+        <div>{location}</div>
       )
       console.tron.log(location)
+    },
+  renderUserMarker (location) {
+  //     /* ***********************************************************
+  //     * STEP 6
+  //     * Customize the appearance and location of the map marker.
+  //     * Customize the callout in ../Components/MapCallout.js
+  //     *************************************************************/
+  //
+      return (
+        <MapView.Marker image={require("/Users/gonewayword/Hack_Reactor/Applications/Litter/App/Images/UserPin.png")} calloutAnchor={(0.4, 0.4)} key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
+          <UserMapCallout text={location.text} location={location} onPress={this.calloutPress} />
+        </MapView.Marker>
+      )
     },
 
   renderMapMarkers (location) {
@@ -119,11 +134,13 @@ var CustomMap = React.createClass({
         <MapView
           ref="map"
           mapType="terrain"
+          scrollEnabled="false"
           style={styles.map}
           region={this.state.region}
           onRegionChange={this.onRegionChange}
           showsUserLocation={this.state.showUserLocation}
         >
+        {this.renderUserMarker(this.state.region)}
         {this.state.locations.map((location) => this.renderMapMarkers(location))}
         </MapView>
         <View style={styles.bubble}>
