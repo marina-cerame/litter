@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "apisauce": "^0.6.0",
+    "firebase": "^3.6.4",
     "format-json": "^1.0.3",
     "lodash": "^4.17.2",
     "querystringify": "0.0.4",
