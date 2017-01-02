@@ -4,12 +4,15 @@ import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
 import styles from './Styles/RoundedButtonStyle'
 import ExamplesRegistry from '../Services/ExamplesRegistry'
+import CustomMap from '../Containers/MapviewExample'
 
 // Example
 ExamplesRegistry.add('Rounded Button', () =>
   <RoundedButton
     text='Litter!'
-    onPress={() => window.alert('This button should pin litter to the map')}
+    onPress={() => {
+      console.log(CustomMap, 'this custom map state region');
+      window.alert('This button should pin litter to the map')}}
   />
 )
 

@@ -11,6 +11,12 @@ import CustomMap from './MapviewExample'
 import styles from './Styles/PresentationScreenStyle'
 
 export default class PresentationScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    console.log(props, 'heres props');
+    console.log(CustomMap, 'heres custom map');
+  }
   render () {
     return (
       <View style={styles.mainContainer}>
