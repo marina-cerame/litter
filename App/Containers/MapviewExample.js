@@ -106,9 +106,10 @@ var CustomMap = React.createClass({
   //     * Customize the callout in ../Components/MapCallout.js
   //     *************************************************************/
   //
+  // calloutAnchor={(0.4, 0.4)}
       return (
-        <MapView.Marker image={require("/Users/gonewayword/Hack_Reactor/Applications/Litter/App/Images/UserPin.png")} calloutAnchor={(0.4, 0.4)} key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
-          <UserMapCallout text={location.text} location={location} onPress={this.calloutPress} />
+        <MapView.Marker image={require("/Users/gonewayword/Hack_Reactor/Applications/Litter/App/Images/UserPin.png")} key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
+          <UserMapCallout style={{width: 500, height: 200}} text={location.text} location={location} onPress={this.calloutPress} />
         </MapView.Marker>
       )
     },
@@ -134,7 +135,7 @@ var CustomMap = React.createClass({
         <MapView
           ref="map"
           mapType="terrain"
-          scrollEnabled="false"
+          scrollEnabled={false}
           style={styles.map}
           region={this.state.region}
           onRegionChange={this.onRegionChange}

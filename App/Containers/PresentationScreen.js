@@ -13,7 +13,7 @@ import styles from './Styles/PresentationScreenStyle'
 export default class PresentationScreen extends React.Component {
   constructor(props) {
     super(props);
-    
+
     console.log(props, 'heres props');
     console.log(CustomMap, 'heres custom map');
   }
@@ -34,32 +34,34 @@ export default class PresentationScreen extends React.Component {
             </Text>
           </View> */}
 
-          <RoundedButton onPress={NavigationActions.componentExamples}>
+          {/* <RoundedButton onPress={NavigationActions.componentExamples}>
             Drop Litter
-          </RoundedButton>
-
-          {/* <RoundedButton onPress={NavigationActions.usageExamples}>
-            Usage Examples Screen
-          </RoundedButton>
-
-          <RoundedButton onPress={NavigationActions.apiTesting}>
-            API Testing Screen
-          </RoundedButton>
-
-          <RoundedButton onPress={NavigationActions.theme}>
-            Theme Screen
-          </RoundedButton>
-
-          <RoundedButton onPress={NavigationActions.deviceInfo}>
-            Device Info Screen
           </RoundedButton> */}
 
-          {/* <View style={styles.centered}>
-            <Text style={styles.subtitle}>Made with ❤️ by Infinite Red</Text>
-          </View> */}
 
         </ScrollView>
       </View>
     )
   }
 }
+
+
+/*{ <RoundedButton onPress={NavigationActions.usageExamples}>
+  Usage Examples Screen
+</RoundedButton>
+
+<RoundedButton onPress={NavigationActions.apiTesting}>
+  API Testing Screen
+</RoundedButton>
+
+<RoundedButton onPress={NavigationActions.theme}>
+  Theme Screen
+</RoundedButton>
+
+<RoundedButton onPress={NavigationActions.deviceInfo}>
+  Device Info Screen
+</RoundedButton> }*/
+
+/*{ <View style={styles.centered}>
+  <Text style={styles.subtitle}>Made with ❤️ by Infinite Red</Text>
+</View> }*/
