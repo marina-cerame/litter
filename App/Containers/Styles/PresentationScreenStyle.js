@@ -1,13 +1,15 @@
 // @flow
 
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { Metrics, ApplicationStyles } from '../../Themes/'
+
+var { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   logo: {
-    height: Metrics.images.logo,
-    width: Metrics.images.logo,
+    height: (height * .7),
+    width: width,
     resizeMode: 'contain'
   },
   centered: {
