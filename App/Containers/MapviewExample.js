@@ -107,12 +107,21 @@ var CustomMap = React.createClass({
     this.setState({ region });
   },
 
+  calloutDeselect (location) {
+    console.log('DESELECTEDDDDDDDD');
+    console.log('coordinate+++++++++++++++', location);
+    firebase.database().ref('litter/').child(location.key).remove();
+
+  },
+
     calloutPress (text,location) {
       /* ***********************************************************
       * STEP 5
       * Configure what will happen (if anything) when the user
       * presses your callout.
       *************************************************************/
+      console.log('PRESSSSSSS', text);
+      console.log(location);
       return (
         <div>{location}</div>
       )
@@ -128,7 +137,7 @@ var CustomMap = React.createClass({
   // calloutAnchor={(0.4, 0.4)}
   // key={location.text}
       return (
-        <MapView.Marker image={require("../Images/UserPin.png")} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
+        <MapView.Marker image={require("../Images/UserPin.png")} coordinate={{latitude: location.latitude, longitude: location.longitude}} >
           <UserMapCallout style={{width: 500, height: 200}} text={location.text} location={location} onPress={this.calloutPress} />
         </MapView.Marker>
       )
@@ -142,7 +151,7 @@ var CustomMap = React.createClass({
   //     *************************************************************/
   //
       return (
-        <MapView.Marker key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
+        <MapView.Marker key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}} location={location} onDeselect={() => this.calloutDeselect(location)}>
           <MapCallout text={location.text} location={location} onPress={this.calloutPress} />
         </MapView.Marker>
       )
