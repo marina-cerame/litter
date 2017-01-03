@@ -43,15 +43,15 @@ class AllComponentsScreen extends React.Component {
               to show/use/test components.  Examples are registered inside each component's file for quick changes and usage identification.
             </Text> */}
             <TextInput
-       style={{height: 40, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
-       maxLength = {40}
-       multiline = {true}
-       numberOfLines = {8}
+               style={{height: 40, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
+               maxLength = {40}
+               multiline = {true}
+               numberOfLines = {8}
 
 
-      //  onChangeText={(text) => this.setState({text})}
-      //  value={this.state.text}
-     />
+              //  onChangeText={(text) => this.setState({text})}
+              //  value={this.state.text}
+             />
             {/* <Text style={styles.subtitle} >
               All components that register examples will be rendered below:
             </Text> */}
