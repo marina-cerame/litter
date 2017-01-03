@@ -120,12 +120,11 @@ var CustomMap = React.createClass({
       * Configure what will happen (if anything) when the user
       * presses your callout.
       *************************************************************/
-      console.log('PRESSSSSSS', text);
-      console.log(location);
-      return (
-        <div>{location}</div>
-      )
-      console.tron.log(location)
+      //
+      // return (
+      //   <div>{location}</div>
+      // )
+      // console.tron.log(location)
     },
   renderUserMarker (location) {
   //     /* ***********************************************************
