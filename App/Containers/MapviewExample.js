@@ -108,7 +108,7 @@ var CustomMap = React.createClass({
   //
   // calloutAnchor={(0.4, 0.4)}
       return (
-        <MapView.Marker image={require("/Users/gonewayword/Hack_Reactor/Applications/Litter/App/Images/UserPin.png")} key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
+        <MapView.Marker image={require("../Images/UserPin.png")} key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
           <UserMapCallout style={{width: 500, height: 200}} text={location.text} location={location} onPress={this.calloutPress} />
         </MapView.Marker>
       )

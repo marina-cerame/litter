@@ -4,6 +4,7 @@ import MapView from 'react-native-maps'
 import Styles from './Styles/MapCalloutStyle'
 import ExamplesRegistry from '../Services/ExamplesRegistry'
 import RoundedButton from './RoundedButton'
+var firebase = require('firebase')
 // var Litter = require('./models/litter');
 
 // Example
@@ -83,6 +84,11 @@ export default class MapCallout extends React.Component {
            onPress={() => {
              console.log(this.inputText, 'heres input text on submit')
              console.log(location.latitude, 'heres latitude')
+             firebase.database().ref('litter/').set({
+               text: this.inputText,
+               longitude: location.longitude,
+               latitude : location.latitude
+             });
            }}
          />
           {/* <Text>{location.latitude}</Text> */}
