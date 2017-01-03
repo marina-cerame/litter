@@ -10,7 +10,7 @@ var {
   Dimensions,
   TouchableOpacity,
 } = ReactNative;
-
+var firebase = require('firebase')
 var MapView = require('react-native-maps');
 
 var { width, height } = Dimensions.get('window');
@@ -36,6 +36,7 @@ var CustomMap = React.createClass({
     // console.log(region, 'heres location in initial state');
     // console.log(position, 'heres position in initial state')
     return {
+      litterRef: firebase.database().ref('litter/'),
       locations: fakeDB,
       showUserLocation: false,
       region: {
@@ -78,6 +79,27 @@ var CustomMap = React.createClass({
 
       this.onRegionChange(newRegion);
     });
+
+
+    this.state.litterRef.on('value', (snap) => {
+
+        // get children as an array
+        var litter = [];
+        snap.forEach((child) => {
+          litter.push({
+            text: child.val().text,
+            latitude: child.val().latitude,
+            longitude: child.val().longitude
+          });
+        });
+        this.setState({ locations: litter })
+
+        // fakeDB = new Array(litter);
+        // console.log(fakeDB, 'is this populating with new fake db?!?!?!?')
+
+      });
+
+
   },
 
   componentWillUnmount: function() {
@@ -108,7 +130,7 @@ var CustomMap = React.createClass({
   //
   // calloutAnchor={(0.4, 0.4)}
       return (
-        <MapView.Marker image={require("../Images/UserPin.png")} key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
+        <MapView.Marker image={require("/Users/gonewayword/Hack_Reactor/Applications/Litter/App/Images/UserPin.png")} key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
           <UserMapCallout style={{width: 500, height: 200}} text={location.text} location={location} onPress={this.calloutPress} />
         </MapView.Marker>
       )

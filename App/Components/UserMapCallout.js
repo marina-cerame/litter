@@ -84,7 +84,7 @@ export default class MapCallout extends React.Component {
            onPress={() => {
              console.log(this.inputText, 'heres input text on submit')
              console.log(location.latitude, 'heres latitude')
-             firebase.database().ref('litter/').set({
+             firebase.database().ref('litter/').push({
                text: this.inputText,
                longitude: location.longitude,
                latitude : location.latitude
