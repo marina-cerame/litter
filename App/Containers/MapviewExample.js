@@ -81,21 +81,18 @@ var CustomMap = React.createClass({
     });
 
 
-    this.state.litterRef.on('value', (snap) => {
+    this.state.litterRef.on('value', (snapshot) => {
 
-        // get children as an array
-        var litter = [];
-        snap.forEach((child) => {
-          litter.push({
-            text: child.val().text,
-            latitude: child.val().latitude,
-            longitude: child.val().longitude
-          });
-        });
-        this.setState({ locations: litter })
+      const snap = snapshot.val();
+      var litter = [];
+      for(let aKey in snap) {
+        snap[aKey].key = aKey;
+        litter.push(snap[aKey])
+      }
 
-        // fakeDB = new Array(litter);
-        // console.log(fakeDB, 'is this populating with new fake db?!?!?!?')
+      this.setState({ locations: litter })
+
+      console.log(litter, 'is this populating with new fake db?!?!?!?')
 
       });
 
@@ -129,8 +126,9 @@ var CustomMap = React.createClass({
   //     *************************************************************/
   //
   // calloutAnchor={(0.4, 0.4)}
+  // key={location.text}
       return (
-        <MapView.Marker image={require("/Users/gonewayword/Hack_Reactor/Applications/Litter/App/Images/UserPin.png")} key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
+        <MapView.Marker image={require("../Images/UserPin.png")} coordinate={{latitude: location.latitude, longitude: location.longitude}}>
           <UserMapCallout style={{width: 500, height: 200}} text={location.text} location={location} onPress={this.calloutPress} />
         </MapView.Marker>
       )
@@ -206,7 +204,25 @@ module.exports = CustomMap;
 
 
 
-
+// snap.forEach(child => {
+//   console.log(child);
+// })
+//   // get children as an array
+//   var litter = [];
+//   snap.forEach((child) => {
+//     const snap = child.val();
+//     for(let key in child.val()) {
+//       snap[key].exists = key;
+//       litter.push(snap[key])
+//     }
+//     // console.log(child.val(), 'heres child')
+//     // litter.push({
+//     //   text: child.val().text,
+//     //   latitude: child.val().latitude,
+//     //   longitude: child.val().longitude,
+//     //   key: snap.val()
+//     // });
+//   });
 
 
 
