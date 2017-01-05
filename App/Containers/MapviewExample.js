@@ -1,8 +1,11 @@
-var React = require('react');
-var ReactNative = require('react-native');
+import React from 'react';
+import ReactNative from 'react-native';
 import MapCallout from '../Components/MapCallout'
 import UserMapCallout from '../Components/UserMapCallout'
-var {
+import firebase from 'firebase';
+import MapView from 'react-native-maps';
+
+const {
   StyleSheet,
   PropTypes,
   View,
@@ -10,28 +13,14 @@ var {
   Dimensions,
   TouchableOpacity,
 } = ReactNative;
-var firebase = require('firebase')
-var MapView = require('react-native-maps');
-
-var { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
-
-// (Initial Static Location) Mumbai
 const LATITUDE = 19.0760;
 const LONGITUDE = 72.8777;
-
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-const fakeDB = [
-  { text: 'You dont know what you got til its gone', latitude: 38.9579357, longitude: -77.0704922},
-  { text: 'Hellooooo from washington', latitude: 38.9579327, longitude: -77.0704902},
-  { text: 'Geriatrics unite', latitude: 38.9579001, longitude: -77.0704800},
-  { text: 'Here be the living', latitude: 38.9559237, longitude: -77.0666152},
-  { text: 'Here are the living', latitude: 29.9510651, longitude: -90.0715331}
-];
-
-var CustomMap = React.createClass({
+const CustomMap = React.createClass({
   getInitialState() {
     // console.log(region, 'heres location in initial state');
     // console.log(position, 'heres position in initial state')
@@ -48,7 +37,7 @@ var CustomMap = React.createClass({
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         console.log(position, 'heres position in comp did mount')
@@ -84,7 +73,7 @@ var CustomMap = React.createClass({
     this.state.litterRef.on('value', (snapshot) => {
 
       const snap = snapshot.val();
-      var litter = [];
+      const litter = [];
       for(let aKey in snap) {
         snap[aKey].key = aKey;
         litter.push(snap[aKey])
@@ -99,7 +88,7 @@ var CustomMap = React.createClass({
 
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
   },
 
@@ -182,7 +171,7 @@ var CustomMap = React.createClass({
   },
 });
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     top: 0,
