@@ -20,10 +20,16 @@ const LONGITUDE = 72.8777;
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
+const fakeDB = [
+  { text: 'You dont know what you got til its gone', latitude: 38.9579357, longitude: -77.0704922},
+  { text: 'Hellooooo from washington', latitude: 38.9579327, longitude: -77.0704902},
+  { text: 'Geriatrics unite', latitude: 38.9579001, longitude: -77.0704800},
+  { text: 'Here be the living', latitude: 38.9559237, longitude: -77.0666152},
+  { text: 'Here are the living', latitude: 29.9510651, longitude: -90.0715331}
+];
+
 const CustomMap = React.createClass({
   getInitialState() {
-    // console.log(region, 'heres location in initial state');
-    // console.log(position, 'heres position in initial state')
     return {
       litterRef: firebase.database().ref('litter/'),
       locations: fakeDB,
@@ -80,9 +86,6 @@ const CustomMap = React.createClass({
       }
 
       this.setState({ locations: litter })
-
-      console.log(litter, 'is this populating with new fake db?!?!?!?')
-
       });
 
 
@@ -97,8 +100,6 @@ const CustomMap = React.createClass({
   },
 
   calloutDeselect (location) {
-    console.log('DESELECTEDDDDDDDD');
-    console.log('coordinate+++++++++++++++', location);
     firebase.database().ref('litter/').child(location.key).remove();
 
   },
@@ -121,9 +122,6 @@ const CustomMap = React.createClass({
   //     * Customize the appearance and location of the map marker.
   //     * Customize the callout in ../Components/MapCallout.js
   //     *************************************************************/
-  //
-  // calloutAnchor={(0.4, 0.4)}
-  // key={location.text}
       return (
         <MapView.Marker image={require("../Images/UserPin.png")} coordinate={{latitude: location.latitude, longitude: location.longitude}} >
           <UserMapCallout style={{width: 500, height: 200}} text={location.text} location={location} onPress={this.calloutPress} />
@@ -137,7 +135,7 @@ const CustomMap = React.createClass({
   //     * Customize the appearance and location of the map marker.
   //     * Customize the callout in ../Components/MapCallout.js
   //     *************************************************************/
-  //
+  
       return (
         <MapView.Marker key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}} location={location} onDeselect={() => this.calloutDeselect(location)}>
           <MapCallout text={location.text} location={location} onPress={this.calloutPress} />
@@ -197,30 +195,6 @@ const styles = StyleSheet.create({
 });
 
 module.exports = CustomMap;
-
-
-
-
-// snap.forEach(child => {
-//   console.log(child);
-// })
-//   // get children as an array
-//   var litter = [];
-//   snap.forEach((child) => {
-//     const snap = child.val();
-//     for(let key in child.val()) {
-//       snap[key].exists = key;
-//       litter.push(snap[key])
-//     }
-//     // console.log(child.val(), 'heres child')
-//     // litter.push({
-//     //   text: child.val().text,
-//     //   latitude: child.val().latitude,
-//     //   longitude: child.val().longitude,
-//     //   key: snap.val()
-//     // });
-//   });
-
 
 
 //Original map view example keeping around in case we need.
