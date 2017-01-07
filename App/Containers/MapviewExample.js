@@ -1,8 +1,11 @@
-var React = require('react');
-var ReactNative = require('react-native');
+import React from 'react';
+import ReactNative from 'react-native';
 import MapCallout from '../Components/MapCallout'
 import UserMapCallout from '../Components/UserMapCallout'
-var {
+import firebase from 'firebase';
+import MapView from 'react-native-maps';
+
+const {
   StyleSheet,
   PropTypes,
   View,
@@ -10,16 +13,10 @@ var {
   Dimensions,
   TouchableOpacity,
 } = ReactNative;
-var firebase = require('firebase')
-var MapView = require('react-native-maps');
-
-var { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
-
-// (Initial Static Location) Mumbai
 const LATITUDE = 19.0760;
 const LONGITUDE = 72.8777;
-
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
@@ -31,10 +28,8 @@ const fakeDB = [
   { text: 'Here are the living', latitude: 29.9510651, longitude: -90.0715331}
 ];
 
-var CustomMap = React.createClass({
+const CustomMap = React.createClass({
   getInitialState() {
-    // console.log(region, 'heres location in initial state');
-    // console.log(position, 'heres position in initial state')
     return {
       litterRef: firebase.database().ref('litter/'),
       locations: fakeDB,
@@ -48,7 +43,7 @@ var CustomMap = React.createClass({
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         console.log(position, 'heres position in comp did mount')
@@ -84,22 +79,19 @@ var CustomMap = React.createClass({
     this.state.litterRef.on('value', (snapshot) => {
 
       const snap = snapshot.val();
-      var litter = [];
+      const litter = [];
       for(let aKey in snap) {
         snap[aKey].key = aKey;
         litter.push(snap[aKey])
       }
 
       this.setState({ locations: litter })
-
-      console.log(litter, 'is this populating with new fake db?!?!?!?')
-
       });
 
 
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
   },
 
@@ -108,8 +100,6 @@ var CustomMap = React.createClass({
   },
 
   calloutDeselect (location) {
-    console.log('DESELECTEDDDDDDDD');
-    console.log('coordinate+++++++++++++++', location);
     firebase.database().ref('litter/').child(location.key).remove();
 
   },
@@ -132,9 +122,6 @@ var CustomMap = React.createClass({
   //     * Customize the appearance and location of the map marker.
   //     * Customize the callout in ../Components/MapCallout.js
   //     *************************************************************/
-  //
-  // calloutAnchor={(0.4, 0.4)}
-  // key={location.text}
       return (
         <MapView.Marker image={require("../Images/UserPin.png")} coordinate={{latitude: location.latitude, longitude: location.longitude}} >
           <UserMapCallout style={{width: 500, height: 200}} text={location.text} location={location} onPress={this.calloutPress} />
@@ -148,7 +135,7 @@ var CustomMap = React.createClass({
   //     * Customize the appearance and location of the map marker.
   //     * Customize the callout in ../Components/MapCallout.js
   //     *************************************************************/
-  //
+
       return (
         <MapView.Marker key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}} location={location} onDeselect={() => this.calloutDeselect(location)}>
           <MapCallout text={location.text} location={location} onPress={this.calloutPress} />
@@ -182,7 +169,7 @@ var CustomMap = React.createClass({
   },
 });
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     top: 0,
@@ -208,30 +195,6 @@ var styles = StyleSheet.create({
 });
 
 module.exports = CustomMap;
-
-
-
-
-// snap.forEach(child => {
-//   console.log(child);
-// })
-//   // get children as an array
-//   var litter = [];
-//   snap.forEach((child) => {
-//     const snap = child.val();
-//     for(let key in child.val()) {
-//       snap[key].exists = key;
-//       litter.push(snap[key])
-//     }
-//     // console.log(child.val(), 'heres child')
-//     // litter.push({
-//     //   text: child.val().text,
-//     //   latitude: child.val().latitude,
-//     //   longitude: child.val().longitude,
-//     //   key: snap.val()
-//     // });
-//   });
-
 
 
 //Original map view example keeping around in case we need.

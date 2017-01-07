@@ -14,11 +14,12 @@ applyConfigSettings()
 const store = createStore()
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCNZ_Lg37shj8__EBvgkW8HmzQOKehMeOM",
-  authDomain: "litter-5a23e.firebaseapp.com",
-  databaseURL: "https://litter-5a23e.firebaseio.com",
-  storageBucket: "litter-5a23e.appspot.com"
-}
+  apiKey: "AIzaSyB0paPSQ7VIMcCdLDUTDaMRXRRNQ-pwGUU",
+  authDomain: "legacy-170ea.firebaseapp.com",
+  databaseURL: "https://legacy-170ea.firebaseio.com",
+  storageBucket: "legacy-170ea.appspot.com",
+  messagingSenderId: "397997657",
+};
 
 const firebaseApp = firebase.initializeApp(firebaseConfig)
 
@@ -32,15 +33,6 @@ function addLitter(litterId, text, longitude, latitude) {
   });
 }
 
-/**
- * Provides an entry point into our application.  Both index.ios.js and index.android.js
- * call this component first.
- *
- * We create our Redux store here, put it into a provider and then bring in our
- * RootContainer.
- *
- * We separate like this to play nice with React Native's hot reloading.
- */
 class App extends Component {
   render () {
     return (

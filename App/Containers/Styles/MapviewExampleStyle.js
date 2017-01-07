@@ -6,9 +6,8 @@ import { ApplicationStyles } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
+    // justifyContent: 'flex-end',
+    // alignItems: 'center'
   },
   map: {
     // For Android :/

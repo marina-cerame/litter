@@ -1,11 +1,12 @@
 // @flow
 
 import React, { Component } from 'react'
-import { View, StatusBar } from 'react-native'
+import { View, StatusBar, Text } from 'react-native'
 import NavigationRouter from '../Navigation/NavigationRouter'
 import { connect } from 'react-redux'
 import StartupActions from '../Redux/StartupRedux'
 import ReduxPersist from '../Config/ReduxPersist'
+import BottomNav from './BottomNav'
 
 // Styles
 import styles from './Styles/RootContainerStyle'
@@ -21,7 +22,7 @@ class RootContainer extends Component {
   render () {
     return (
       <View style={styles.applicationView}>
-        <StatusBar barStyle='light-content' />
+        <StatusBar backgroundColor='blue' barStyle='light-content' />
         <NavigationRouter />
       </View>
     )

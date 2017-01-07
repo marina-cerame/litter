@@ -48,7 +48,7 @@ export default class MapCallout extends React.Component {
 
   handleChangeSubmit (e) {
     this.inputText = e.nativeEvent.text
-    console.log(this.inputText, 'why work for connor but no me')
+    console.log(this.inputText, 'why work for connor but no me');
   }
 
   render () {

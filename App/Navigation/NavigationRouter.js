@@ -8,18 +8,19 @@ import NavItems from './NavItems'
 import CustomNavBar from '../Navigation/CustomNavBar'
 
 // screens identified by the router
-import PresentationScreen from '../Containers/PresentationScreen'
-import AllComponentsScreen from '../Containers/AllComponentsScreen'
-import UsageExamplesScreen from '../Containers/UsageExamplesScreen'
-import LoginScreen from '../Containers/LoginScreen'
-import ListviewExample from '../Containers/ListviewExample'
-import ListviewGridExample from '../Containers/ListviewGridExample'
-import ListviewSectionsExample from '../Containers/ListviewSectionsExample'
-import ListviewSearchingExample from '../Containers/ListviewSearchingExample'
-import MapviewExample from '../Containers/MapviewExample'
-import APITestingScreen from '../Containers/APITestingScreen'
-import ThemeScreen from '../Containers/ThemeScreen'
-import DeviceInfoScreen from '../Containers/DeviceInfoScreen'
+import PresentationScreen from '../Containers/PresentationScreen';
+import AllComponentsScreen from '../Containers/AllComponentsScreen';
+import UsageExamplesScreen from '../Containers/UsageExamplesScreen';
+import ListviewExample from '../Containers/ListviewExample';
+import ListviewGridExample from '../Containers/ListviewGridExample';
+import ListviewSectionsExample from '../Containers/ListviewSectionsExample';
+import ListviewSearchingExample from '../Containers/ListviewSearchingExample';
+import MapviewExample from '../Containers/MapviewExample';
+import ThemeScreen from '../Containers/ThemeScreen';
+import Loader from '../Containers/Loader';
+import Signup from '../Containers/Signup';
+import Login from '../Containers/Login';
+
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -31,20 +32,21 @@ class NavigationRouter extends Component {
       <Router>
         <Scene key='drawer' /*component={NavigationDrawer}*/ open={false}>
           <Scene key='drawerChildrenWrapper' navigationBarStyle={Styles.navBar} titleStyle={Styles.title} leftButtonIconStyle={Styles.leftButton} rightButtonTextStyle={Styles.rightButton}>
-            <Scene initial key='presentationScreen' component={PresentationScreen} title='Litter' renderLeftButton={NavItems.hamburgerButton} />
+            {/* prebuilt react stuff i'm afraid to touch: */}
+            <Scene initail key='loader' component={Loader} title='' />
             <Scene key='componentExamples' component={AllComponentsScreen} title='Drop Litter' />
+            <Scene key='mapviewExample' component={MapviewExample} title='Litter' />
             <Scene key='usageExamples' component={UsageExamplesScreen} title='Usage' rightTitle='Example' onRight={() => window.alert('Example Pressed')} />
-            <Scene key='login' component={LoginScreen} title='Login' hideNavBar />
             <Scene key='listviewExample' component={ListviewExample} title='Listview Example' />
             <Scene key='listviewGridExample' component={ListviewGridExample} title='Listview Grid' />
             <Scene key='listviewSectionsExample' component={ListviewSectionsExample} title='Listview Sections' />
             <Scene key='listviewSearchingExample' component={ListviewSearchingExample} title='Listview Searching' navBar={CustomNavBar} />
-            <Scene key='mapviewExample' component={MapviewExample} title='Mapview Example' />
-            <Scene key='apiTesting' component={APITestingScreen} title='API Testing' />
             <Scene key='theme' component={ThemeScreen} title='Theme' />
+            {/* actual stuff we use:  */}
+            <Scene key='signup' component={Signup} title='Sign Up' />
+            <Scene key='login' component={Login} title='Log In' />
+            <Scene key='presentationScreen' component={PresentationScreen} title='Litter' renderLeftButton={NavItems.hamburgerButton} />
 
-            {/* Custom navigation bar example */}
-            <Scene key='deviceInfo' component={DeviceInfoScreen} title='Device Info' />
           </Scene>
         </Scene>
       </Router>

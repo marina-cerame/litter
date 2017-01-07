@@ -6,16 +6,13 @@ import { Images } from '../Themes'
 import RoundedButton from '../Components/RoundedButton'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import CustomMap from './MapviewExample'
-
+import BottomNav from './BottomNav'
 // Styles
 import styles from './Styles/PresentationScreenStyle'
 
 export default class PresentationScreen extends React.Component {
   constructor(props) {
     super(props);
-
-    console.log(props, 'heres props');
-    console.log(CustomMap, 'heres custom map');
   }
   render () {
     return (
@@ -27,18 +24,10 @@ export default class PresentationScreen extends React.Component {
             <CustomMap />
           </View>
 
-          {/* <View style={styles.section} >
-            <Text style={styles.sectionText} >
-              Click a pin from the map to collect litter,
-              Click the button below to drop your own
-            </Text>
-          </View> */}
-
-          {/* <RoundedButton onPress={NavigationActions.componentExamples}>
+          {/* <RoundedButton onPress={NavigationActions.login}>
             Drop Litter
           </RoundedButton> */}
-
-
+          <BottomNav />
         </ScrollView>
       </View>
     )
