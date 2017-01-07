@@ -17,9 +17,7 @@ import ListviewGridExample from '../Containers/ListviewGridExample';
 import ListviewSectionsExample from '../Containers/ListviewSectionsExample';
 import ListviewSearchingExample from '../Containers/ListviewSearchingExample';
 import MapviewExample from '../Containers/MapviewExample';
-import APITestingScreen from '../Containers/APITestingScreen';
 import ThemeScreen from '../Containers/ThemeScreen';
-import DeviceInfoScreen from '../Containers/DeviceInfoScreen';
 import Loader from '../Containers/Loader';
 
 /* **************************
@@ -42,10 +40,8 @@ class NavigationRouter extends Component {
             <Scene key='listviewGridExample' component={ListviewGridExample} title='Listview Grid' />
             <Scene key='listviewSectionsExample' component={ListviewSectionsExample} title='Listview Sections' />
             <Scene key='listviewSearchingExample' component={ListviewSearchingExample} title='Listview Searching' navBar={CustomNavBar} />
-            <Scene key='mapviewExample' component={MapviewExample} title='Mapview Example' />
-            <Scene key='apiTesting' component={APITestingScreen} title='API Testing' />
+            <Scene key='mapviewExample' component={MapviewExample} title='Mapview Example'  />
             <Scene key='theme' component={ThemeScreen} title='Theme' />
-            <Scene key='deviceInfo' component={DeviceInfoScreen} title='Device Info' />
             {/* actual stuff we wrote:  */}
           </Scene>
         </Scene>

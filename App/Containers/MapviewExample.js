@@ -135,7 +135,7 @@ const CustomMap = React.createClass({
   //     * Customize the appearance and location of the map marker.
   //     * Customize the callout in ../Components/MapCallout.js
   //     *************************************************************/
-  
+
       return (
         <MapView.Marker key={location.text} coordinate={{latitude: location.latitude, longitude: location.longitude}} location={location} onDeselect={() => this.calloutDeselect(location)}>
           <MapCallout text={location.text} location={location} onPress={this.calloutPress} />

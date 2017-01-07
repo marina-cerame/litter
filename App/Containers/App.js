@@ -19,7 +19,7 @@ const firebaseConfig = {
   databaseURL: "https://legacy-170ea.firebaseio.com",
   storageBucket: "legacy-170ea.appspot.com",
   messagingSenderId: "397997657",
-}
+};
 
 const firebaseApp = firebase.initializeApp(firebaseConfig)
 
@@ -33,15 +33,6 @@ function addLitter(litterId, text, longitude, latitude) {
   });
 }
 
-/**
- * Provides an entry point into our application.  Both index.ios.js and index.android.js
- * call this component first.
- *
- * We create our Redux store here, put it into a provider and then bring in our
- * RootContainer.
- *
- * We separate like this to play nice with React Native's hot reloading.
- */
 class App extends Component {
   render () {
     return (

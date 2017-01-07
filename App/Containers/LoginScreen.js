@@ -17,6 +17,7 @@ import {Images, Metrics} from '../Themes'
 import LoginActions from '../Redux/LoginRedux'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import I18n from 'react-native-i18n'
+import firebase from 'firebase';
 
 type LoginScreenProps = {
   dispatch: () => any,
@@ -44,8 +45,9 @@ class LoginScreen extends React.Component {
   constructor (props: LoginScreenProps) {
     super(props)
     this.state = {
-      username: 'reactnative@infinite.red',
-      password: 'password',
+      username: '',
+      email: '',
+      password: '',
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
     }
@@ -61,8 +63,6 @@ class LoginScreen extends React.Component {
   }
 
   componentWillMount () {
-    // Using keyboardWillShow/Hide looks 1,000 times better, but doesn't work on Android
-    // TODO: Revisit this if Android begins to support - https://github.com/facebook/react-native/issues/3468
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow)
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide)
   }
@@ -92,22 +92,66 @@ class LoginScreen extends React.Component {
   }
 
   handlePressLogin = () => {
-    const { username, password } = this.state
-    this.isAttempting = true
-    // attempt a login - a saga is listening to pick it up from here.
-    this.props.attemptLogin(username, password)
+    const { username, password, email } = this.state
+    const newUser = {
+  username: username,
+  email: email,
+  password: password,
+};
+const nameAndEmail = {
+  username: username,
+  email: email,
+};
+
+let err = false;
+
+// the next 6 lines ensures a username is unique before signup
+firebase.database().ref(`/users/${newUser.username}`)
+.once('value')
+.then(snapshot => {
+  if (snapshot.val()) {
+    err = true;
+    window.alert('username is already taken');
+  }
+})
+.then(() => { // if username is unique this will add user to firebase Authentication
+  if (!err) {
+    firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
+    .catch(error => {
+      err = true;
+      console.warn(error);
+    })
+    .then(() => { //  if there are no error up to this point, this will add username
+      if (!err) { //  and email to database
+        firebase.database().ref(`users/${newUser.username}`).push(nameAndEmail);
+      }
+    })
+    .then(() => {
+      firebase.auth().currentUser.updateProfile({
+        displayName: newUser.username,
+      });
+    })
+    .then(() => {
+      if (!err) {
+        NavigationActions.mapviewExample()
+      }
+    });
+  }
+});
   }
 
   handleChangeUsername = (text) => {
-    this.setState({ username: text })
+    this.setState({ username: text });
   }
-
+  handleChangeEmail = (text) => {
+    this.setState({ email: text });
+  }
   handleChangePassword = (text) => {
-    this.setState({ password: text })
+    this.setState({ password: text });
   }
 
-  render () {
-    const { username, password } = this.state
+  render() {
+    const { username, password, email } = this.state
     const { fetching } = this.props
     const editable = !fetching
     const textInputStyle = editable ? Styles.textInput : Styles.textInputReadonly
@@ -130,6 +174,22 @@ class LoginScreen extends React.Component {
               underlineColorAndroid='transparent'
               onSubmitEditing={() => this.refs.password.focus()}
               placeholder={I18n.t('username')} />
+          </View>
+          <View style={Styles.row}>
+            <Text style={Styles.rowLabel}>Email</Text>
+            <TextInput
+              ref='email'
+              style={textInputStyle}
+              value={email}
+              editable={editable}
+              keyboardType='default'
+              returnKeyType='next'
+              autoCapitalize='none'
+              autoCorrect={false}
+              onChangeText={this.handleChangeEmail}
+              underlineColorAndroid='transparent'
+              onSubmitEditing={() => this.refs.password.focus()}
+              placeholder='Email' />
           </View>
 
           <View style={Styles.row}>

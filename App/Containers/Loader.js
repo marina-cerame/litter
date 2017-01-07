@@ -6,7 +6,7 @@ import firebase from 'firebase';
 class Loader extends Component {
   componentDidMount() {
     // firebase.auth().currentUser
-    true ? NavigationActions.presentationScreen() : NavigationActions.login();
+    firebase.auth().currentUser ? NavigationActions.presentationScreen() : NavigationActions.login();
   }
   render() {
     return (
