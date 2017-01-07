@@ -18,6 +18,8 @@ import LoginActions from '../Redux/LoginRedux'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import I18n from 'react-native-i18n'
 import firebase from 'firebase';
+import RoundedButton from '../Components/RoundedButton'
+
 
 type LoginScreenProps = {
   dispatch: () => any,
@@ -133,7 +135,7 @@ firebase.database().ref(`/users/${newUser.username}`)
     })
     .then(() => {
       if (!err) {
-        NavigationActions.mapviewExample()
+        NavigationActions.presentationScreen()
       }
     });
   }
@@ -213,17 +215,13 @@ firebase.database().ref(`/users/${newUser.username}`)
           <View style={[Styles.loginRow]}>
             <TouchableOpacity style={Styles.loginButtonWrapper} onPress={this.handlePressLogin}>
               <View style={Styles.loginButton}>
-                <Text style={Styles.loginText}>{I18n.t('signIn')}</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={NavigationActions.pop}>
-              <View style={Styles.loginButton}>
-                <Text style={Styles.loginText}>{I18n.t('cancel')}</Text>
+                <Text style={Styles.loginText}>Sign Up</Text>
               </View>
             </TouchableOpacity>
           </View>
         </View>
-
+        <Text style={{ color: 'white' }}> Have an account? </Text>
+        <RoundedButton onPress={NavigationActions.login}>Sign In</RoundedButton>
       </ScrollView>
     )
   }

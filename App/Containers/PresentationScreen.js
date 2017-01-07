@@ -6,7 +6,7 @@ import { Images } from '../Themes'
 import RoundedButton from '../Components/RoundedButton'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import CustomMap from './MapviewExample'
-
+import BottomNav from './BottomNav'
 // Styles
 import styles from './Styles/PresentationScreenStyle'
 
@@ -27,7 +27,7 @@ export default class PresentationScreen extends React.Component {
           {/* <RoundedButton onPress={NavigationActions.login}>
             Drop Litter
           </RoundedButton> */}
-
+          <BottomNav />
         </ScrollView>
       </View>
     )

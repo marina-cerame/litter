@@ -18,6 +18,8 @@ import LoginActions from '../Redux/LoginRedux'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import I18n from 'react-native-i18n'
 import firebase from 'firebase';
+import RoundedButton from '../Components/RoundedButton'
+
 
 type LoginScreenProps = {
   dispatch: () => any,
@@ -25,7 +27,7 @@ type LoginScreenProps = {
   attemptLogin: () => void
 }
 
-class LoginScreen extends React.Component {
+class Login extends React.Component {
 
   props: LoginScreenProps
 
@@ -216,14 +218,10 @@ firebase.database().ref(`/users/${newUser.username}`)
                 <Text style={Styles.loginText}>{I18n.t('signIn')}</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={NavigationActions.pop}>
-              <View style={Styles.loginButton}>
-                <Text style={Styles.loginText}>{I18n.t('cancel')}</Text>
-              </View>
-            </TouchableOpacity>
           </View>
         </View>
-
+        <Text style={{ color: 'white' }}> Need an account? </Text>
+        <RoundedButton onPress={NavigationActions.signup}>Sign Up</RoundedButton>
       </ScrollView>
     )
   }
@@ -242,4 +240,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

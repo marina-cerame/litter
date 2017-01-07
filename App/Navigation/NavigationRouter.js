@@ -19,6 +19,7 @@ import MapviewExample from '../Containers/MapviewExample';
 import ThemeScreen from '../Containers/ThemeScreen';
 import Loader from '../Containers/Loader';
 import Signup from '../Containers/Signup';
+import Login from '../Containers/Login';
 
 
 /* **************************
@@ -33,8 +34,8 @@ class NavigationRouter extends Component {
           <Scene key='drawerChildrenWrapper' navigationBarStyle={Styles.navBar} titleStyle={Styles.title} leftButtonIconStyle={Styles.leftButton} rightButtonTextStyle={Styles.rightButton}>
             {/* prebuilt react stuff i'm afraid to touch: */}
             <Scene initail key='loader' component={Loader} title='' />
-            <Scene key='presentationScreen' component={PresentationScreen} title='Litter' renderLeftButton={NavItems.hamburgerButton} />
             <Scene key='componentExamples' component={AllComponentsScreen} title='Drop Litter' />
+            <Scene key='mapviewExample' component={MapviewExample} title='Litter' />
             <Scene key='usageExamples' component={UsageExamplesScreen} title='Usage' rightTitle='Example' onRight={() => window.alert('Example Pressed')} />
             <Scene key='listviewExample' component={ListviewExample} title='Listview Example' />
             <Scene key='listviewGridExample' component={ListviewGridExample} title='Listview Grid' />
@@ -43,7 +44,8 @@ class NavigationRouter extends Component {
             <Scene key='theme' component={ThemeScreen} title='Theme' />
             {/* actual stuff we use:  */}
             <Scene key='signup' component={Signup} title='Sign Up' />
-            <Scene key='mapviewExample' component={MapviewExample} title='Litter' />
+            <Scene key='login' component={Login} title='Log In' />
+            <Scene key='presentationScreen' component={PresentationScreen} title='Litter' renderLeftButton={NavItems.hamburgerButton} />
 
           </Scene>
         </Scene>
