@@ -94,57 +94,24 @@ class Login extends React.Component {
   }
 
   handlePressLogin = () => {
-    const { username, password, email } = this.state
-    const newUser = {
-  username: username,
-  email: email,
-  password: password,
-};
-const nameAndEmail = {
-  username: username,
-  email: email,
-};
-
-let err = false;
-
-// the next 6 lines ensures a username is unique before signup
-firebase.database().ref(`/users/${newUser.username}`)
-.once('value')
-.then(snapshot => {
-  if (snapshot.val()) {
-    err = true;
-    window.alert('username is already taken');
-  }
-})
-.then(() => { // if username is unique this will add user to firebase Authentication
-  if (!err) {
-    firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
-    .catch(error => {
-      err = true;
-      console.warn(error);
-    })
-    .then(() => { //  if there are no error up to this point, this will add username
-      if (!err) { //  and email to database
-        firebase.database().ref(`users/${newUser.username}`).push(nameAndEmail);
-      }
-    })
-    .then(() => {
-      firebase.auth().currentUser.updateProfile({
-        displayName: newUser.username,
+    const { password, email } = this.state
+    const loginUser = {
+      email: email,
+      password: password,
+    }
+    let err = false;
+    firebase.auth().signInWithEmailAndPassword(loginUser.email, loginUser.password)
+      .catch(error => {
+        err = true;
+        window.alert(error);
+      })
+      .then(() => {
+        if (!err) {
+          NavigationActions.presentationScreen();
+        }
       });
-    })
-    .then(() => {
-      if (!err) {
-        NavigationActions.presentationScreen()
-      }
-    });
-  }
-});
   }
 
-  handleChangeUsername = (text) => {
-    this.setState({ username: text });
-  }
   handleChangeEmail = (text) => {
     this.setState({ email: text });
   }
@@ -161,22 +128,6 @@ firebase.database().ref(`/users/${newUser.username}`)
       <ScrollView contentContainerStyle={{justifyContent: 'center'}} style={[Styles.container, {height: this.state.visibleHeight}]} keyboardShouldPersistTaps>
         <Image source={Images.logo} style={[Styles.topLogo, this.state.topLogo]} />
         <View style={Styles.form}>
-          <View style={Styles.row}>
-            <Text style={Styles.rowLabel}>{I18n.t('username')}</Text>
-            <TextInput
-              ref='username'
-              style={textInputStyle}
-              value={username}
-              editable={editable}
-              keyboardType='default'
-              returnKeyType='next'
-              autoCapitalize='none'
-              autoCorrect={false}
-              onChangeText={this.handleChangeUsername}
-              underlineColorAndroid='transparent'
-              onSubmitEditing={() => this.refs.password.focus()}
-              placeholder={I18n.t('username')} />
-          </View>
           <View style={Styles.row}>
             <Text style={Styles.rowLabel}>Email</Text>
             <TextInput
