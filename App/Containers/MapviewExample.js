@@ -100,6 +100,21 @@ const CustomMap = React.createClass({
   },
 
   calloutDeselect (location) {
+    const user = firebase.auth().currentUser.displayName;
+    const today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; //January is 0!
+    const yyyy = today.getFullYear();
+    if (dd < 10) { dd = '0' + dd};
+    if (mm<10) { mm = '0' + mm };
+
+    const litter = {
+      text: location.text,
+      longitude: location.longitude,
+      latitude: location.latitude,
+      date: `${dd}/${mm}/${yyyy}`,
+    }
+    firebase.database().ref(`collections/${user}`).push(litter);
     firebase.database().ref('litter/').child(location.key).remove();
 
   },
@@ -110,11 +125,7 @@ const CustomMap = React.createClass({
       * Configure what will happen (if anything) when the user
       * presses your callout.
       *************************************************************/
-      //
-      // return (
-      //   <div>{location}</div>
-      // )
-      // console.tron.log(location)
+
     },
   renderUserMarker (location) {
   //     /* ***********************************************************

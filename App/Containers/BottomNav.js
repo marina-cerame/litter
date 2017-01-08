@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import { View, TouchableOpacity, Text } from 'react-native'
-import RoundedButton from '../Components/RoundedButton'
+import React, { Component } from 'react';
+import { View, TouchableOpacity, Text } from 'react-native';
+import RoundedButton from '../Components/RoundedButton';
+import { Actions as NavigationActions } from 'react-native-router-flux';
 
 
 class BottomNav extends Component {
@@ -8,10 +9,10 @@ class BottomNav extends Component {
     return (
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <TouchableOpacity style={{ flex: 1} }>
-          <RoundedButton>map view</RoundedButton>
+          <RoundedButton onPress={NavigationActions.presentationScreen}>map view</RoundedButton>
         </TouchableOpacity>
         <TouchableOpacity style={{ flex: 1 }}>
-          <RoundedButton>collection</RoundedButton>
+          <RoundedButton onPress={NavigationActions.collection}>collection</RoundedButton>
         </TouchableOpacity>
       </View>
     );

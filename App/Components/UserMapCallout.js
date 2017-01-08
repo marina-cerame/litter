@@ -57,33 +57,22 @@ export default class MapCallout extends React.Component {
     * Note: if you don't want your callout surrounded by the default tooltip, pass `tooltip={true}` to `MapView.Callout`
     *************************************************************/
     const { location } = this.props
-    // const { text } = this.state
-    // const { fetching } = this.props
-    // const editable = !fetching
     return (
       <MapView.Callout style={Styles.callout}>
-        {/* <TouchableOpacity onPress={this.onPress}> */}
         <View>
           <TextInput
            ref={input => { this.litterInput = input }}
-          //  editable={editable}
-          //  keyboardType='default'
-          //  returnKeyType='next'
            clearTextOnFocus={true}
            style={{height: 40, width: 300, borderColor: 'gray', borderWidth: 1, backgroundColor: 'white'}}
            maxLength = {200}
            multiline = {false}
            placeholder="Type a poem. Think a thought."
            onChange={this.handleChangeSubmit}
-          //  value={this.state.text}
-          //  onSubmitEditing
            numberOfLines = {1}
          />
          <RoundedButton
            text='Litter!'
            onPress={() => {
-             console.log(this.inputText, 'heres input text on submit')
-             console.log(location.latitude, 'heres latitude')
              firebase.database().ref('litter/').push({
                text: this.inputText,
                longitude: location.longitude,
@@ -91,8 +80,6 @@ export default class MapCallout extends React.Component {
              });
            }}
          />
-          {/* <Text>{location.latitude}</Text> */}
-        {/* </TouchableOpacity> */}
       </View>
       </MapView.Callout>
     )
