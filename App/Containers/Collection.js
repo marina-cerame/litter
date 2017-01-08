@@ -25,8 +25,7 @@ class Collection extends Component {
         snap[aKey].key = aKey;
         litter.push(snap[aKey])
       }
-      this.setState({collection: ds.cloneWithRows(litter)});
-      this.forceUpdate();
+      this.setState({dataSource: ds.cloneWithRows(litter)});
     })
   }
 
