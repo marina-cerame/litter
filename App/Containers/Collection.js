@@ -11,9 +11,7 @@ class Collection extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       ref: firebase.database().ref(`collections/${firebase.auth().currentUser.displayName}`),
-      dataSource: ds.cloneWithRows([
-        { text: 'text', date: 'date' }, { text: 'text', date: 'date' }, { text: 'text', date: 'date' }, { text: 'text', date: 'date' }, { text: 'text', date: 'date' },
-      ])
+      dataSource: ds.cloneWithRows([{ text: 'text', date: 'date' }])
     };
   }
   componentDidMount() {
@@ -25,8 +23,14 @@ class Collection extends Component {
         snap[aKey].key = aKey;
         litter.push(snap[aKey])
       }
-      this.setState({dataSource: ds.cloneWithRows(litter)});
+      this.state.dataSource = ds.cloneWithRows(litter);
+      this.forceUpdate();
     })
+  }
+  componentWillUnmount() {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state.datasource = ds.cloneWithRows([{text: 'test', date: 'date'}]);
+    this.state.ref = firebase.database().ref(`collections/${firebase.auth().currentUser.displayName}`);
   }
 
   _renderRow (rowData) {
@@ -44,6 +48,7 @@ class Collection extends Component {
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
         />
+        <BottomNav />
       </View>
     );
   }
