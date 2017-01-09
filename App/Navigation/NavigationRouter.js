@@ -20,6 +20,7 @@ import ThemeScreen from '../Containers/ThemeScreen';
 import Loader from '../Containers/Loader';
 import Signup from '../Containers/Signup';
 import Login from '../Containers/Login';
+import Collection from '../Containers/Collection';
 
 
 /* **************************
@@ -46,7 +47,7 @@ class NavigationRouter extends Component {
             <Scene key='signup' component={Signup} title='Sign Up' />
             <Scene key='login' component={Login} title='Log In' />
             <Scene key='presentationScreen' component={PresentationScreen} title='Litter' renderLeftButton={NavItems.hamburgerButton} />
-
+            <Scene key='collection' component={Collection} title='Your Collection' />
           </Scene>
         </Scene>
       </Router>
