@@ -40,6 +40,8 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need access to photos for upload to drop image litters</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
