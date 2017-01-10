@@ -50,7 +50,7 @@ export default class MapCallout extends React.Component {
     var options = {
       title: 'Select Avatar',
       customButtons: null,
-      quality: 0.1,
+      quality: 0.000001,
       storageOptions: {
         skipBackup: true,
         path: 'images'
