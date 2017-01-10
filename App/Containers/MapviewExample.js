@@ -102,17 +102,15 @@ const CustomMap = React.createClass({
   calloutDeselect (location) {
     const user = firebase.auth().currentUser.displayName;
     const today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth()+1; //January is 0!
-    const yyyy = today.getFullYear();
-    if (dd < 10) { dd = '0' + dd};
-    if (mm<10) { mm = '0' + mm };
-
+    const d = today.getDate();
+    let m = today.getMonth();
+    const y = today.getFullYear();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const litter = {
       text: location.text,
       longitude: location.longitude,
       latitude: location.latitude,
-      date: `${dd}/${mm}/${yyyy}`,
+      date: `${months[m]} ${d}, ${y}`,
     }
     firebase.database().ref(`collections/${user}`).push(litter);
     firebase.database().ref('litter/').child(location.key).remove();
