@@ -6,7 +6,7 @@ import ExamplesRegistry from '../Services/ExamplesRegistry'
 import RoundedButton from './RoundedButton'
 import { Images } from '../Themes';
 import ImagePicker from 'react-native-image-picker';
-var firebase = require('firebase')
+import firebase from 'firebase';
 
 
 type MapCalloutProps = {
@@ -18,7 +18,9 @@ type MapCalloutProps = {
 export default class MapCallout extends React.Component {
   props: MapCalloutProps
   state: {
-    text: string
+    text: string,
+    lat: number,
+    long: number
   }
   constructor (props: MapCalloutProps) {
     super(props)
@@ -47,10 +49,8 @@ export default class MapCallout extends React.Component {
   handlePhoto() {
     var options = {
       title: 'Select Avatar',
-      customButtons: [
-        //TODO
-        {name: 'fb', title: 'Choose Photo from Facebook'},
-      ],
+      customButtons: null,
+      quality: 0.1,
       storageOptions: {
         skipBackup: true,
         path: 'images'
@@ -75,18 +75,77 @@ export default class MapCallout extends React.Component {
         // TODO pick definition for source
 
         // You can display the image using either data...
-        const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+        // const source = {uri: response.data, isStatic: true};
         // or a reference to the platform specific asset location
         // if (Platform.OS === 'ios') {
-        //   const source = {uri: response.uri.replace('file://', ''), isStatic: true};
+          const source = {uri: response.uri.replace('file://', ''), isStatic: true};
         // } else {
         //   const source = {uri: response.uri, isStatic: true};
         // }
-        this.setState({
-          avatarSource: source
+        firebase.database().ref('litter/').push({
+          text: response.data,
+          longitude: this.state.long, //location.longitude,
+          latitude : this.state.lat, //location.latitude
+          isImage: true
         });
+
+        //Upload to firebase
+    //     var storage = firebase.storage();
+    //     var storageRef = storage.ref()
+    //     var file = source.uri //TODO this.state.avatarSource (?)
+    //     // Create the file metadata
+    //     var metadata = {
+    //       contentType: 'image/jpeg'
+    //     };
+    //     // Upload file and metadata to the object 'images/mountains.jpg'
+    //     // TODO: make sure this works with the way we have the firebase storage setup
+    //     // var uploadTask = storageRef.child('images/test').put(file, metadata);
+    //     var message = source.uri;
+    //     var uploadTask = ref.putString(message, 'base64').then(function(snapshot) { console.log('uploaded') });
+    //     // Listen for state changes, errors, and completion of the upload.
+    //     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+    //       function(snapshot) {
+    //         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+    //         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //         console.log('Upload is ' + progress + '% done');
+    //         switch (snapshot.state) {
+    //           case firebase.storage.TaskState.PAUSED: // or 'paused'
+    //             console.log('Upload is paused');
+    //             break;
+    //           case firebase.storage.TaskState.RUNNING: // or 'running'
+    //             console.log('Upload is running');
+    //             break;
+    //         }
+    //       }, function(error) {
+    //       switch (error.code) {
+    //
+    //         //TODO: fill in these error codes if we feel like it
+    //
+    //         case 'storage/unauthorized':
+    //           // User doesn't have permission to access the object
+    //           break;
+    //         case 'storage/canceled':
+    //           // User canceled the upload
+    //           break;
+    //         case 'storage/unknown':
+    //           // Unknown error occurred, inspect error.serverResponse
+    //           break;
+    //       }
+    //     }, function() {
+    //       // Upload completed successfully, now we can get the download URL
+    //
+    //       //TODO: this is the download url, save it with the litter(?)
+    //
+    //       var downloadURL = uploadTask.snapshot.downloadURL;
+    //     });
+    //
+    //     this.setState({
+    //       avatarSource: source
+    //     });
       }
     });
+
+
   }
 
 
@@ -100,6 +159,8 @@ export default class MapCallout extends React.Component {
     * Note: if you don't want your callout surrounded by the default tooltip, pass `tooltip={true}` to `MapView.Callout`
     *************************************************************/
     const { location } = this.props
+    this.state.lat = location.latitude
+    this.state.long = location.longitude
     return (
       <MapView.Callout style={Styles.callout}>
         <View>
