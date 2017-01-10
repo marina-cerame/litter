@@ -1,32 +1,12 @@
 import React from 'react'
-<<<<<<< HEAD
 import { Text, View, ScrollView, TouchableOpacity, TextInput, Image, Platform } from 'react-native'
-=======
-import { Text, View, ScrollView, TouchableOpacity, TextInput, Image } from 'react-native'
->>>>>>> fix logo, add photo button
 import MapView from 'react-native-maps'
 import Styles from './Styles/MapCalloutStyle'
 import ExamplesRegistry from '../Services/ExamplesRegistry'
 import RoundedButton from './RoundedButton'
 import { Images } from '../Themes';
-<<<<<<< HEAD
 import ImagePicker from 'react-native-image-picker';
 import firebase from 'firebase';
-
-=======
-var firebase = require('firebase')
-// var Litter = require('./models/litter');
-
-// Example
-// ExamplesRegistry.add('Map Callout', () =>
-//   <MapCallout
-//     location={{
-//       title: 'Callout Example'
-//     }}
-//     onPress={() => window.alert('That tickles!')}
-//   />
-// )
->>>>>>> fix logo, add photo button
 
 type MapCalloutProps = {
   location: Object,
